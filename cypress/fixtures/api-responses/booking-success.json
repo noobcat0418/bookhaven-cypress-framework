@@ -1,0 +1,15 @@
+{
+  "bookingid": 1,
+  "booking": {
+    "roomid": 1,
+    "firstname": "James",
+    "lastname": "Anderson",
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2026-06-15",
+      "checkout": "2026-06-18"
+    },
+    "email": "james.anderson@bookhaven.test",
+    "phone": "12345678901"
+  }
+}

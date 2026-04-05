@@ -1,0 +1,24 @@
+{
+  "rooms": [
+    {
+      "roomid": 1,
+      "roomName": "101",
+      "type": "Single",
+      "accessible": true,
+      "image": "https://www.mwtestconsultancy.co.uk/img/room1.jpg",
+      "description": "A cozy single room",
+      "features": ["WiFi", "TV"],
+      "roomPrice": 80
+    },
+    {
+      "roomid": 2,
+      "roomName": "201",
+      "type": "Double",
+      "accessible": false,
+      "image": "https://www.mwtestconsultancy.co.uk/img/room1.jpg",
+      "description": "A spacious double room",
+      "features": ["WiFi", "TV", "Views"],
+      "roomPrice": 150
+    }
+  ]
+}

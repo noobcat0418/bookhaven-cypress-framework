@@ -1,0 +1,9 @@
+{
+  "roomName": "301",
+  "type": "Double",
+  "accessible": false,
+  "image": "https://www.mwtestconsultancy.co.uk/img/room1.jpg",
+  "description": "A comfortable double room with garden views",
+  "features": ["WiFi", "TV", "Safe"],
+  "roomPrice": 120
+}

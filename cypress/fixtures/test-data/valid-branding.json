@@ -1,0 +1,16 @@
+{
+  "name": "BookHaven B&B",
+  "logoUrl": "https://www.mwtestconsultancy.co.uk/img/rbp-logo.png",
+  "description": "Welcome to BookHaven, a charming boutique bed and breakfast.",
+  "latitude": "52.6351204",
+  "longitude": "-1.6981345",
+  "directions": "From the M20, take exit 9 and follow signs to Ashford town centre.",
+  "contactName": "BookHaven Reception",
+  "contactPhone": "01234567890",
+  "contactEmail": "info@bookhaven.test",
+  "line1": "123 High Street",
+  "line2": "Village Centre",
+  "postTown": "Ashford",
+  "county": "Kent",
+  "postCode": "TN24 8XX"
+}

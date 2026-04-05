@@ -1,0 +1,39 @@
+{
+  "name": "bookhaven-qa-automation",
+  "version": "1.0.0",
+  "description": "Cypress E2E test automation suite for BookHaven hotel booking platform",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:smoke": "cypress run --env grepTags=@smoke",
+    "cy:run:regression": "cypress run --env grepTags=@regression",
+    "cy:run:api": "cypress run --spec 'cypress/e2e/api/**/*.cy.ts'",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:headed": "cypress run --headed",
+    "lint": "eslint 'cypress/**/*.ts'",
+    "format": "prettier --write 'cypress/**/*.ts' '*.ts' '*.json' '*.js'"
+  },
+  "keywords": [
+    "cypress",
+    "qa-automation",
+    "e2e-testing",
+    "typescript"
+  ],
+  "author": "Mikeryan Cervantes",
+  "license": "MIT",
+  "devDependencies": {
+    "@cypress/grep": "^6.0.0",
+    "@eslint/js": "^10.0.1",
+    "@testing-library/cypress": "^10.1.0",
+    "@types/node": "^25.5.0",
+    "axe-core": "^4.11.1",
+    "cypress": "^15.13.0",
+    "cypress-axe": "^1.7.0",
+    "cypress-mochawesome-reporter": "^4.0.2",
+    "cypress-real-events": "^1.15.0",
+    "eslint": "^10.1.0",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.2"
+  }
+}

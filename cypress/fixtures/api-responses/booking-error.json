@@ -1,0 +1,6 @@
+{
+  "errorCode": 400,
+  "error": "BAD_REQUEST",
+  "errorMessage": "Validation failed",
+  "fieldErrors": ["must not be null"]
+}
