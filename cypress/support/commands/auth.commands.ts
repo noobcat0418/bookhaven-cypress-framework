@@ -9,6 +9,7 @@ Cypress.Commands.add('adminLogin', (username = 'admin', password = 'password') =
     body: { username, password },
   }).then((response) => {
     expect(response.status).to.eq(200);
+    cy.setCookie('token', response.body.token);
   });
 });
 

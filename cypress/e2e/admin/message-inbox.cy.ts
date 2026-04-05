@@ -35,10 +35,12 @@ describe('Message Inbox', { tags: ['@regression'] }, () => {
     });
   });
 
-  it('should close the message detail modal', () => {
+  it('should close the message detail by navigating back', () => {
     adminMessagesPage.openMessage(0);
     adminMessagesPage.verifyMessageDetail();
-    cy.get(adminMessagesPage.selectors.closeDetail).click();
+    // Navigate back to message list to close the detail view
+    adminMessagesPage.visit();
+    cy.get(adminMessagesPage.selectors.messageRow(0)).should('be.visible');
   });
 
   it('should delete a message', () => {

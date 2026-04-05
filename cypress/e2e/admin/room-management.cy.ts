@@ -26,7 +26,7 @@ describe('Room Management', { tags: ['@regression'] }, () => {
     cy.get(adminRoomsPage.selectors.roomListing).should('contain.text', room.roomName);
 
     // Clean up: delete the created room via API
-    cy.request('GET', '/api/room/').then((response) => {
+    cy.request('GET', '/api/room').then((response) => {
       const createdRoom = response.body.rooms.find(
         (r: { roomName: string }) => r.roomName === room.roomName,
       );
@@ -49,7 +49,7 @@ describe('Room Management', { tags: ['@regression'] }, () => {
     cy.get(adminRoomsPage.selectors.roomListing).should('contain.text', room.roomName);
 
     // Clean up
-    cy.request('GET', '/api/room/').then((response) => {
+    cy.request('GET', '/api/room').then((response) => {
       const createdRoom = response.body.rooms.find(
         (r: { roomName: string }) => r.roomName === room.roomName,
       );

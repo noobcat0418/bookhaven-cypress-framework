@@ -5,8 +5,8 @@ describe('Navigation', { tags: ['@regression'] }, () => {
     homePage.visit();
   });
 
-  it('should display the hotel logo', () => {
-    cy.get('.hotel-logoUrl img').should('be.visible');
+  it('should display the hotel logo/brand', () => {
+    cy.get('.navbar-brand').should('be.visible');
   });
 
   it('should have an admin link that navigates to /admin', () => {
@@ -15,7 +15,7 @@ describe('Navigation', { tags: ['@regression'] }, () => {
   });
 
   it('should display the map section', () => {
-    cy.get('.map').should('exist');
+    cy.get('.pigeon-tiles-box').should('exist');
   });
 
   it('should display the footer', () => {
@@ -32,7 +32,7 @@ describe('Navigation', { tags: ['@regression'] }, () => {
     });
 
     it('should render the page correctly on mobile', () => {
-      cy.get('.hotel-room-info').should('have.length.greaterThan', 0);
+      cy.get('.room-card').should('have.length.greaterThan', 0);
     });
   });
 
@@ -42,7 +42,7 @@ describe('Navigation', { tags: ['@regression'] }, () => {
     });
 
     it('should render the page correctly on tablet', () => {
-      cy.get('.hotel-room-info').should('have.length.greaterThan', 0);
+      cy.get('.room-card').should('have.length.greaterThan', 0);
     });
   });
 });

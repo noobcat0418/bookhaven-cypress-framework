@@ -22,6 +22,14 @@ class AdminBrandingPage {
     cy.visit('/admin/branding');
   }
 
+  private clearAndType(selector: string, value: string) {
+    cy.get(selector).focus().invoke('val', '').trigger('input').type(value);
+  }
+
+  private setNumericValue(selector: string, value: string) {
+    cy.get(selector).focus().invoke('val', value).trigger('input').trigger('change');
+  }
+
   fillBranding(data: {
     name: string;
     logoUrl: string;
@@ -37,27 +45,28 @@ class AdminBrandingPage {
     county: string;
     postCode: string;
   }) {
-    cy.get(this.selectors.name).clear().type(data.name);
-    cy.get(this.selectors.logoUrl).clear().type(data.logoUrl);
-    cy.get(this.selectors.description).clear().type(data.description);
-    cy.get(this.selectors.latitude).clear().type(data.latitude);
-    cy.get(this.selectors.longitude).clear().type(data.longitude);
-    cy.get(this.selectors.contactName).clear().type(data.contactName);
-    cy.get(this.selectors.contactPhone).clear().type(data.contactPhone);
-    cy.get(this.selectors.contactEmail).clear().type(data.contactEmail);
-    cy.get(this.selectors.line1).clear().type(data.line1);
-    cy.get(this.selectors.line2).clear().type(data.line2);
-    cy.get(this.selectors.postTown).clear().type(data.postTown);
-    cy.get(this.selectors.county).clear().type(data.county);
-    cy.get(this.selectors.postCode).clear().type(data.postCode);
+    this.setNumericValue(this.selectors.name, data.name);
+    this.setNumericValue(this.selectors.logoUrl, data.logoUrl);
+    this.setNumericValue(this.selectors.description, data.description);
+    this.setNumericValue(this.selectors.latitude, data.latitude);
+    this.setNumericValue(this.selectors.longitude, data.longitude);
+    this.setNumericValue(this.selectors.contactName, data.contactName);
+    this.setNumericValue(this.selectors.contactPhone, data.contactPhone);
+    this.setNumericValue(this.selectors.contactEmail, data.contactEmail);
+    this.setNumericValue(this.selectors.line1, data.line1);
+    this.setNumericValue(this.selectors.line2, data.line2);
+    this.setNumericValue(this.selectors.postTown, data.postTown);
+    this.setNumericValue(this.selectors.county, data.county);
+    this.setNumericValue(this.selectors.postCode, data.postCode);
   }
 
   submit() {
+    cy.intercept('PUT', '/api/branding').as('updateBranding');
     cy.get(this.selectors.submitButton).click();
   }
 
   verifySuccess() {
-    cy.get(this.selectors.successMessage).should('be.visible');
+    cy.wait('@updateBranding').its('response.statusCode').should('eq', 200);
   }
 }
 

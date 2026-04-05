@@ -9,8 +9,10 @@ export function getFutureDate(daysFromNow: number): string {
 }
 
 export function getFutureDatePair(startDaysFromNow: number, nights: number): { checkin: string; checkout: string } {
+  // Use random offset to avoid date conflicts between bookings on the same room
+  const randomOffset = Math.floor(Math.random() * 300);
   return {
-    checkin: getFutureDate(startDaysFromNow),
-    checkout: getFutureDate(startDaysFromNow + nights),
+    checkin: getFutureDate(startDaysFromNow + randomOffset),
+    checkout: getFutureDate(startDaysFromNow + randomOffset + nights),
   };
 }

@@ -29,7 +29,8 @@ describe('Booking Management', { tags: ['@regression'] }, () => {
   });
 
   it('should display bookings on the room detail page', () => {
-    cy.get(adminRoomDetailPage.selectors.bookings.row).should('have.length.greaterThan', 0);
+    // Verify bookings exist by checking for edit buttons
+    cy.get(adminRoomDetailPage.selectors.bookings.editButton).should('have.length.greaterThan', 0);
   });
 
   it('should enter edit mode for a booking', () => {
@@ -46,8 +47,8 @@ describe('Booking Management', { tags: ['@regression'] }, () => {
 
   it('should delete a booking', () => {
     adminRoomDetailPage.deleteBooking(0);
-    // After deletion, the booking row should no longer exist
-    cy.get(adminRoomDetailPage.selectors.bookings.row).should('have.length', 0);
+    // After deletion, the booking edit buttons should no longer exist
+    cy.get(adminRoomDetailPage.selectors.bookings.editButton).should('not.exist');
     bookingId = 0; // Prevent afterEach cleanup
   });
 });

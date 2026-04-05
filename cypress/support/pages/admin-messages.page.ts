@@ -4,7 +4,7 @@ class AdminMessagesPage {
     messageSubject: (index: number) => `[data-testid="messageDescription${index}"]`,
     deleteButton: (index: number) => `[data-testid="DeleteMessage${index}"]`,
     messageDetail: '[data-testid="message"]',
-    closeDetail: '.close',
+    closeDetail: '.btn-close, [aria-label="Close"]',
     unreadBadge: '.badge',
   };
 

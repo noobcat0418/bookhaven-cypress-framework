@@ -5,9 +5,9 @@ class ContactPage {
     phone: '[data-testid="ContactPhone"]',
     subject: '[data-testid="ContactSubject"]',
     description: '[data-testid="ContactDescription"]',
-    submitButton: '#submitContact',
-    successMessage: '.contact h2',
-    errorMessages: '.alert-danger',
+    submitButton: '#contact .btn-primary',
+    successMessage: '#contact h2, #contact .alert-success',
+    errorMessages: '#contact .alert-danger, #contact .text-danger',
   };
 
   fillForm(data: { name: string; email: string; phone: string; subject: string; description: string }) {
@@ -23,7 +23,7 @@ class ContactPage {
   }
 
   verifySuccess(name: string) {
-    cy.get(this.selectors.successMessage).should('contain.text', `Thanks for getting in touch ${name}!`);
+    cy.contains(`Thanks for getting in touch ${name}!`, { timeout: 15000 }).should('be.visible');
   }
 
   verifyErrors() {

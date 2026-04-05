@@ -20,7 +20,7 @@ export default defineConfig({
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       require('cypress-mochawesome-reporter/plugin')(on);
       // eslint-disable-next-line @typescript-eslint/no-require-imports
-      require('@cypress/grep/src/plugin')(config);
+      require('@cypress/grep/plugin').plugin(config);
       return config;
     },
     env: {

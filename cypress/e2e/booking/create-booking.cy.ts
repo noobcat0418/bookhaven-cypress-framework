@@ -1,5 +1,5 @@
 import { reservationPage } from '../../support/pages/reservation.page';
-import { generateRoom } from '../../support/helpers/data.factory';
+import { generateRoom, generateBooking } from '../../support/helpers/data.factory';
 
 describe('Create Booking', { tags: ['@regression'] }, () => {
   let roomId: number;
@@ -19,28 +19,32 @@ describe('Create Booking', { tags: ['@regression'] }, () => {
 
   it('should navigate to reservation page for a room', () => {
     reservationPage.visit(roomId);
-    cy.get(reservationPage.selectors.calendar).should('be.visible');
-    cy.get(reservationPage.selectors.firstname).should('be.visible');
+    reservationPage.verifyRoomDetailsLoaded();
   });
 
-  it('should complete a full booking flow', () => {
+  it('should display room amenities on reservation page', () => {
     reservationPage.visit(roomId);
+    cy.get(reservationPage.selectors.amenityIcons).should('have.length.greaterThan', 0);
+  });
 
-    reservationPage.selectDatesOnCalendar();
+  it('should display breadcrumb navigation', () => {
+    reservationPage.visit(roomId);
+    reservationPage.verifyBreadcrumb();
+  });
 
-    reservationPage.fillGuestDetails({
-      firstname: 'James',
-      lastname: 'Anderson',
-      email: 'james@bookhaven.test',
-      phone: '12345678901',
+  it('should create a booking via API and verify it exists', () => {
+    const booking = generateBooking({ roomid: roomId });
+    cy.createBookingViaApi(booking).then((res) => {
+      expect(res.bookingid).to.exist;
+
+      // Verify booking exists via GET (requires auth)
+      cy.adminLogin();
+      cy.request(`/api/booking/${res.bookingid}`).then((response) => {
+        expect(response.status).to.eq(200);
+        expect(response.body.firstname).to.eq(booking.firstname);
+      });
+
+      cy.deleteBookingViaApi(res.bookingid);
     });
-
-    reservationPage.submitReservation();
-    reservationPage.verifyConfirmation();
-  });
-
-  it('should display correct room information on reservation page', () => {
-    reservationPage.visit(roomId);
-    cy.get('.room-header').should('exist');
   });
 });

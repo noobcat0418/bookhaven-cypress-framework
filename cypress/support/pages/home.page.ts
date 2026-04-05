@@ -1,26 +1,26 @@
 class HomePage {
   readonly selectors = {
-    logo: '.hotel-logoUrl img',
+    logo: '.navbar-brand',
     nav: {
       rooms: 'a[href="#rooms"]',
       contact: 'a[href="#contact"]',
       adminLink: 'a[href="/admin"]',
     },
     rooms: {
-      cards: '.hotel-room-info',
-      bookButton: '.openBooking',
-      roomType: '.type',
-      roomDescription: '.room-description',
-      roomImage: '.hotel-img',
-      features: '.room-features',
-      price: '.room-price',
+      cards: '.room-card',
+      bookButton: '.room-card .btn-primary',
+      roomType: '.room-card .card-title',
+      roomDescription: '.room-card .card-text',
+      roomImage: '.room-card .card-img-top',
+      features: '.room-card .badge',
+      price: '.room-card .fw-bold.fs-5',
     },
     availability: {
-      checkin: 'input[placeholder="Check-in"]',
-      checkout: 'input[placeholder="Check-out"]',
-      checkButton: 'button.btn-outline-primary',
+      checkin: '.booking-card input:first',
+      checkout: '.booking-card input:last',
+      checkButton: '.booking-card .btn-primary',
     },
-    map: '.map',
+    map: '.pigeon-tiles-box',
     footer: 'footer',
   };
 
@@ -43,7 +43,7 @@ class HomePage {
   }
 
   navigateToAdmin() {
-    cy.get(this.selectors.nav.adminLink).click();
+    cy.get(this.selectors.nav.adminLink).first().click();
   }
 }
 

@@ -11,7 +11,7 @@ describe('Availability Check', { tags: ['@regression'] }, () => {
 
   it('should show room details including type and price', () => {
     homePage.getRoomCards().first().within(() => {
-      cy.get('.type').should('exist');
+      cy.get('.card-title').should('exist');
     });
   });
 
@@ -21,13 +21,13 @@ describe('Availability Check', { tags: ['@regression'] }, () => {
   });
 
   it('should display room images', () => {
-    cy.get('.hotel-img img').should('have.length.greaterThan', 0);
-    cy.get('.hotel-img img').first().should('be.visible');
+    cy.get('.room-card .card-img-top').should('have.length.greaterThan', 0);
+    cy.get('.room-card .card-img-top').first().should('be.visible');
   });
 
   it('should show feature badges on room cards', () => {
     homePage.getRoomCards().first().within(() => {
-      cy.get('.room-features').should('exist');
+      cy.get('.badge').should('exist');
     });
   });
 });

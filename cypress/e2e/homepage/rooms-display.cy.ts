@@ -11,31 +11,31 @@ describe('Rooms Display', { tags: ['@regression'] }, () => {
 
   it('should show room type on each card', () => {
     homePage.getRoomCards().first().within(() => {
-      cy.get('.type').should('not.be.empty');
+      cy.get('.card-title').should('not.be.empty');
     });
   });
 
   it('should show room description', () => {
-    cy.get('.room-description').first().should('not.be.empty');
+    cy.get('.room-card .card-text').first().should('not.be.empty');
   });
 
   it('should display room images', () => {
-    cy.get('.hotel-img img').each(($img) => {
+    cy.get('.room-card .card-img-top').each(($img) => {
       cy.wrap($img).should('be.visible').and('have.attr', 'src').and('not.be.empty');
     });
   });
 
   it('should show feature badges (WiFi, TV, etc)', () => {
     homePage.getRoomCards().first().within(() => {
-      cy.get('.room-features').should('exist');
+      cy.get('.badge').should('exist');
     });
   });
 
-  it('should display a "Book now" button on each room card', () => {
-    cy.get('.openBooking').should('have.length.greaterThan', 0);
+  it('should display a "Book" button on each room card', () => {
+    cy.get('.room-card .btn-primary').should('have.length.greaterThan', 0);
   });
 
-  it('should navigate to reservation page when clicking "Book now"', () => {
+  it('should navigate to reservation page when clicking "Book"', () => {
     homePage.clickBookOnRoom(0);
     cy.url().should('include', '/reservation/');
   });

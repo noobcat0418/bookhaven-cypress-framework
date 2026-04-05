@@ -42,7 +42,8 @@ describe('Contact Form', { tags: ['@regression'] }, () => {
     contactPage.submit();
     contactPage.verifySuccess(message.name);
 
-    // Form fields should be cleared or success state shown
-    cy.get(contactPage.selectors.successMessage).should('be.visible');
+    // Success state is already verified by verifySuccess above
+    // Verify the form fields are no longer visible (replaced by success message)
+    cy.get(contactPage.selectors.name).should('not.exist');
   });
 });

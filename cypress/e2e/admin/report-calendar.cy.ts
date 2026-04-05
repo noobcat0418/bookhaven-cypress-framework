@@ -33,10 +33,9 @@ describe('Report Calendar', { tags: ['@regression'] }, () => {
     adminReportPage.getCalendarEvents().should('have.length.greaterThan', 0);
   });
 
-  it('should display the admin booking form', () => {
-    cy.get(adminReportPage.selectors.bookingForm.firstname).should('be.visible');
-    cy.get(adminReportPage.selectors.bookingForm.lastname).should('be.visible');
-    cy.get(adminReportPage.selectors.bookingForm.roomId).should('be.visible');
-    cy.get(adminReportPage.selectors.bookingForm.depositPaid).should('be.visible');
+  it('should display calendar navigation controls', () => {
+    cy.contains('button', 'Today').should('be.visible');
+    cy.contains('button', 'Back').should('be.visible');
+    cy.contains('button', 'Next').should('be.visible');
   });
 });

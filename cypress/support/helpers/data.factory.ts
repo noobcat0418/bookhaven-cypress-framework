@@ -25,7 +25,7 @@ export function generateBooking(overrides?: Partial<BookingPayload>): BookingPay
 export function generateRoom(overrides?: Partial<RoomPayload>): RoomPayload {
   const id = uniqueId();
   return {
-    roomName: `${100 + (id % 900)}`,
+    roomName: `R${id}`.slice(0, 10),
     type: 'Double',
     accessible: false,
     image: 'https://www.mwtestconsultancy.co.uk/img/room1.jpg',
@@ -56,7 +56,7 @@ export function generateBranding() {
     latitude: '52.6351204',
     longitude: '-1.6981345',
     contactName: 'BookHaven Reception',
-    contactPhone: '01onal281100',
+    contactPhone: '012345678901',
     contactEmail: 'info@bookhaven.test',
     line1: '123 High Street',
     line2: 'Village Centre',

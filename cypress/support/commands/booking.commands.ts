@@ -6,7 +6,7 @@ Cypress.Commands.add('createBookingViaApi', (data: BookingPayload) => {
   return cy
     .request({
       method: 'POST',
-      url: `${API_URL}/api/booking/`,
+      url: `${API_URL}/api/booking`,
       body: data,
     })
     .then((response) => {

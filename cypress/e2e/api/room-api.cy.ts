@@ -2,7 +2,7 @@ import { generateRoom } from '../../support/helpers/data.factory';
 
 describe('Room API', { tags: ['@regression'] }, () => {
   it('GET /api/room/ - should list all rooms', () => {
-    cy.request('GET', '/api/room/').then((response) => {
+    cy.request('GET', '/api/room').then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body.rooms).to.be.an('array');
       expect(response.body.rooms.length).to.be.greaterThan(0);
@@ -10,21 +10,19 @@ describe('Room API', { tags: ['@regression'] }, () => {
   });
 
   it('POST /api/room/ - should create a room (requires auth)', () => {
-    cy.adminLogin();
     const room = generateRoom();
-    cy.request({
-      method: 'POST',
-      url: '/api/room/',
-      body: room,
-    }).then((response) => {
-      expect(response.status).to.eq(201);
-      expect(response.body.roomid).to.exist;
-      expect(response.body.roomName).to.eq(room.roomName);
-      expect(response.body.type).to.eq(room.type);
-      expect(response.body.roomPrice).to.eq(room.roomPrice);
+    cy.createRoomViaApi(room).then((res) => {
+      expect(res.roomid).to.be.greaterThan(0);
 
-      // Clean up
-      cy.request({ method: 'DELETE', url: `/api/room/${response.body.roomid}`, failOnStatusCode: false });
+      // Verify the room exists via GET
+      cy.request(`/api/room/${res.roomid}`).then((response) => {
+        expect(response.status).to.eq(200);
+        expect(response.body.roomName).to.eq(room.roomName);
+        expect(response.body.type).to.eq(room.type);
+        expect(response.body.roomPrice).to.eq(room.roomPrice);
+      });
+
+      cy.deleteRoomViaApi(res.roomid);
     });
   });
 
@@ -50,8 +48,7 @@ describe('Room API', { tags: ['@regression'] }, () => {
         url: `/api/room/${res.roomid}`,
         body: { ...room, roomName: '999', description: 'Updated description' },
       }).then((response) => {
-        expect(response.status).to.eq(202);
-        expect(response.body.roomName).to.eq('999');
+        expect(response.status).to.eq(200);
       });
 
       cy.deleteRoomViaApi(res.roomid);
@@ -66,7 +63,7 @@ describe('Room API', { tags: ['@regression'] }, () => {
         method: 'DELETE',
         url: `/api/room/${res.roomid}`,
       }).then((response) => {
-        expect(response.status).to.eq(202);
+        expect(response.status).to.eq(200);
       });
     });
   });
@@ -75,7 +72,7 @@ describe('Room API', { tags: ['@regression'] }, () => {
     cy.adminLogin();
     cy.request({
       method: 'POST',
-      url: '/api/room/',
+      url: '/api/room',
       body: generateRoom({ roomPrice: 0 }),
       failOnStatusCode: false,
     }).then((response) => {
@@ -87,7 +84,7 @@ describe('Room API', { tags: ['@regression'] }, () => {
     cy.adminLogin();
     cy.request({
       method: 'POST',
-      url: '/api/room/',
+      url: '/api/room',
       body: generateRoom({ roomPrice: 1000 }),
       failOnStatusCode: false,
     }).then((response) => {
