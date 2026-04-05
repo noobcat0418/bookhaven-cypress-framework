@@ -8,8 +8,19 @@ describe('Report Calendar', { tags: ['@regression'] }, () => {
     const room = generateRoom();
     cy.createRoomViaApi(room).then((res) => {
       roomId = res.roomid;
-      // Create a booking so it shows on the calendar
-      const booking = generateBooking({ roomid: roomId });
+      // Create a booking within the current month so it appears on the default calendar view
+      const today = new Date();
+      const checkin = new Date(today.getFullYear(), today.getMonth(), Math.min(today.getDate() + 1, 25));
+      const checkout = new Date(checkin);
+      checkout.setDate(checkout.getDate() + 2);
+      const formatDate = (d: Date) => d.toISOString().split('T')[0];
+      const booking = generateBooking({
+        roomid: roomId,
+        bookingdates: {
+          checkin: formatDate(checkin),
+          checkout: formatDate(checkout),
+        },
+      });
       cy.createBookingViaApi(booking);
     });
   });
