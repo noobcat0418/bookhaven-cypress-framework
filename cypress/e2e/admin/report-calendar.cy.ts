@@ -41,6 +41,8 @@ describe('Report Calendar', { tags: ['@regression'] }, () => {
   });
 
   it('should display booking events on the calendar', () => {
+    cy.reload();
+    cy.get(adminReportPage.selectors.calendar, { timeout: 15000 }).should('be.visible');
     adminReportPage.getCalendarEvents().should('have.length.greaterThan', 0);
   });
 

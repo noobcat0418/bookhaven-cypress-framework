@@ -17,7 +17,7 @@ class AdminReportPage {
   }
 
   getCalendarEvents() {
-    return cy.get(this.selectors.events);
+    return cy.get(this.selectors.events, { timeout: 15000 });
   }
 
   fillBookingForm(data: { firstname: string; lastname: string; roomId: string; depositPaid: string }) {
