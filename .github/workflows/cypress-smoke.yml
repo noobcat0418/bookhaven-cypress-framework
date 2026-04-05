@@ -2,7 +2,7 @@ name: Cypress Smoke Tests
 
 on:
   push:
-    branches: ['**']
+    branches: [main, develop]
 
 jobs:
   cypress-smoke:
@@ -33,8 +33,8 @@ jobs:
 
       - name: Upload smoke report
         uses: actions/upload-artifact@v4
-        if: always()
+        if: failure()
         with:
           name: smoke-report
           path: cypress/reports/
-          retention-days: 7
+          retention-days: 1

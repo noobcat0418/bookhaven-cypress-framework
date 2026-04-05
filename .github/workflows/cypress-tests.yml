@@ -38,11 +38,11 @@ jobs:
 
       - name: Upload test reports
         uses: actions/upload-artifact@v4
-        if: always()
+        if: failure()
         with:
           name: cypress-reports-${{ matrix.containers }}
           path: cypress/reports/
-          retention-days: 14
+          retention-days: 3
 
       - name: Upload screenshots
         uses: actions/upload-artifact@v4
@@ -50,4 +50,4 @@ jobs:
         with:
           name: cypress-screenshots-${{ matrix.containers }}
           path: cypress/screenshots/
-          retention-days: 7
+          retention-days: 3
